@@ -956,9 +956,8 @@ async function handleStart() {
     return;
   }
 
-  // Not played — log "started" and launch puzzle
+  // Not played — launch puzzle (only completed games are logged)
   btn.innerHTML = '<span class="spin"></span>&nbsp;STARTING…';
-  await sendToSheets(email, 'started', 0, 0);
 
   document.getElementById('gateOverlay').style.display = 'none';
   document.getElementById('app').style.display = 'block';
