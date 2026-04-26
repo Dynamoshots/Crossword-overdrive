@@ -457,7 +457,7 @@
 
   <div class="hdr">
     <div>
-      <div class="hdr-event">FinTech Knowledge Challenge</div>
+      <div class="hdr-event">FinTech Crossword</div>
       <div class="hdr-title">OVER<em>DRIVE</em></div>
       <div class="hdr-sub">12 terms · 90 pts max · one shot only</div>
     </div>
@@ -689,7 +689,24 @@ function cellInput(e, r, c) {
   inp.value = raw ? raw[raw.length-1] : '';
   setStatus('');
   checkWordsRealTime();
-  if (inp.value) step(r, c, 1);
+  if (inp.value) stepSkippingLocked(r, c);
+}
+
+// Advance to next editable cell, skipping over any locked cells in between
+function stepSkippingLocked(r, c) {
+  const dr = activeDir === 'across' ? 0 : 1;
+  const dc = activeDir === 'across' ? 1 : 0;
+  let nr = r + dr, nc = c + dc;
+  while (nr >= 0 && nr < ROWS && nc >= 0 && nc < COLS) {
+    const k = `${nr},${nc}`;
+    if (!cellEls[k]) break;          // hit a black cell — stop
+    if (!lockedCells.has(k)) {       // found an unlocked cell — go there
+      setActive(nr, nc, false);
+      return;
+    }
+    nr += dr; nc += dc;              // locked — skip and keep looking
+  }
+  // Nothing unlocked ahead; stay where we are
 }
 
 function cellKey(e, r, c) {
