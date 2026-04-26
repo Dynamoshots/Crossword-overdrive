@@ -50,7 +50,7 @@
 
     .gate-card { background: var(--darker); border: 2px solid var(--orange); max-width: 420px; width: 100%; overflow: hidden; }
 
-    .gate-top { background: var(--orange); padding: 28px 32px 26px; position: relative; }
+    .gate-top { background: var(--orange); padding: 0; position: relative; }
     .gate-chk-corner { position: absolute; top: 12px; right: 12px; width: 52px; height: 52px; background-image: repeating-conic-gradient(#000 0% 25%, var(--dark) 0% 50%); background-size: 13px 13px; opacity: .3; }
     .gate-org  { font-family: var(--f-cond); font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--dark); opacity: .65; margin-bottom: 4px; }
     .gate-name { font-family: var(--f-head); font-size: 72px; line-height: .88; letter-spacing: .02em; color: var(--dark); }
@@ -82,7 +82,7 @@
        ALREADY PLAYED SCREEN
     ════════════════════════════════════════ */
     .played-card { background: var(--darker); border: 2px solid var(--purple); max-width: 420px; width: 100%; overflow: hidden; }
-    .played-top  { background: var(--purple); padding: 28px 32px 26px; position: relative; }
+    .played-top  { background: var(--purple); padding: 0; position: relative; }
     .played-top .gate-name { color: var(--white); }
     .played-top .gate-org  { color: var(--white); opacity: .6; }
     .played-top .gate-tagline { color: var(--white); opacity: .6; }
@@ -264,10 +264,45 @@
   <!-- default: email form -->
   <div class="gate-card" id="gateForm">
     <div class="gate-top">
-      <div class="gate-chk-corner"></div>
-      <div class="gate-org">Pine Labs · Group Business Strategy Meet</div>
-      <div class="gate-name">OVER<br>DRIVE</div>
-      <div class="gate-tagline">Go fast, stay in charge.</div>
+
+      <!-- Checkerboard racing strip (top) -->
+      <div style="height:18px;background-image:repeating-conic-gradient(#000 0% 25%,#fff 0% 50%);background-size:18px 18px;"></div>
+
+      <!-- Purple OVERDRIVE band — speed rays + wordmark -->
+      <div style="background:#4B00FF;position:relative;overflow:hidden;padding:0;">
+
+        <!-- Speed rays -->
+        <svg viewBox="0 0 400 10" xmlns="http://www.w3.org/2000/svg"
+             style="position:absolute;inset:0;width:100%;height:100%;opacity:.15;" preserveAspectRatio="none">
+          <line x1="200" y1="0" x2="-60" y2="10" stroke="#fff" stroke-width="60"/>
+          <line x1="200" y1="0" x2="0"   y2="10" stroke="#fff" stroke-width="40"/>
+          <line x1="200" y1="0" x2="80"  y2="10" stroke="#fff" stroke-width="26"/>
+          <line x1="200" y1="0" x2="460" y2="10" stroke="#fff" stroke-width="60"/>
+          <line x1="200" y1="0" x2="400" y2="10" stroke="#fff" stroke-width="40"/>
+          <line x1="200" y1="0" x2="320" y2="10" stroke="#fff" stroke-width="26"/>
+        </svg>
+
+        <!-- OVERDRIVE wordmark -->
+        <svg viewBox="0 0 400 90" xmlns="http://www.w3.org/2000/svg"
+             style="display:block;width:100%;">
+          <text x="200" y="78"
+                text-anchor="middle"
+                font-family="'Bebas Neue', Impact, sans-serif"
+                font-size="82"
+                fill="#ffffff"
+                textLength="390"
+                lengthAdjust="spacing">OVERDRIVE</text>
+        </svg>
+      </div>
+
+      <!-- Checkerboard racing strip (bottom) -->
+      <div style="height:18px;background-image:repeating-conic-gradient(#000 0% 25%,#fff 0% 50%);background-size:18px 18px;"></div>
+
+      <!-- Org info -->
+      <div style="padding:12px 28px 18px;">
+        <div class="gate-org" style="margin-bottom:4px;">Pine Labs · Group Business Strategy Meet</div>
+        <div class="gate-tagline">Go fast, stay in charge.</div>
+      </div>
     </div>
     <div class="chk"></div>
     <div class="gate-body">
@@ -292,10 +327,34 @@
   <!-- already played message (hidden by default) -->
   <div class="played-card" id="playedCard" style="display:none">
     <div class="played-top">
-      <div class="gate-chk-corner"></div>
-      <div class="gate-org">Pine Labs · Group Business Strategy Meet</div>
-      <div class="gate-name">OVER<br>DRIVE</div>
-      <div class="gate-tagline">Go fast, stay in charge.</div>
+      <!-- Checkerboard top -->
+      <div style="height:18px;background-image:repeating-conic-gradient(#000 0% 25%,#fff 0% 50%);background-size:18px 18px;"></div>
+
+      <!-- White band with dark OVERDRIVE (right-poster style) -->
+      <div style="background:rgba(255,255,255,0.92);position:relative;overflow:hidden;">
+        <svg viewBox="0 0 400 10" xmlns="http://www.w3.org/2000/svg"
+             style="position:absolute;inset:0;width:100%;height:100%;opacity:.08;" preserveAspectRatio="none">
+          <line x1="200" y1="0" x2="-60" y2="10" stroke="#000" stroke-width="60"/>
+          <line x1="200" y1="0" x2="0"   y2="10" stroke="#000" stroke-width="40"/>
+          <line x1="200" y1="0" x2="460" y2="10" stroke="#000" stroke-width="60"/>
+          <line x1="200" y1="0" x2="400" y2="10" stroke="#000" stroke-width="40"/>
+        </svg>
+        <svg viewBox="0 0 400 90" xmlns="http://www.w3.org/2000/svg"
+             style="display:block;width:100%;">
+          <text x="200" y="78" text-anchor="middle"
+                font-family="'Bebas Neue', Impact, sans-serif"
+                font-size="82" fill="#1a1a1a"
+                textLength="390" lengthAdjust="spacing">OVERDRIVE</text>
+        </svg>
+      </div>
+
+      <!-- Checkerboard bottom -->
+      <div style="height:18px;background-image:repeating-conic-gradient(#000 0% 25%,#fff 0% 50%);background-size:18px 18px;"></div>
+
+      <div style="padding:12px 28px 18px;">
+        <div class="gate-org" style="color:var(--white);opacity:.6;margin-bottom:4px;">Pine Labs · Group Business Strategy Meet</div>
+        <div class="gate-tagline" style="color:var(--white);opacity:.7;">Go fast, stay in charge.</div>
+      </div>
     </div>
     <div class="chk chk-played"></div>
     <div class="played-body">
@@ -316,7 +375,18 @@
     <div class="win-banner">
       <div class="win-banner-chk"></div>
       <span class="win-flag">🏁</span>
-      <h2>OVER<br>DRIVE</h2>
+      <div style="margin:6px 0 4px;">
+        <div style="height:14px;background-image:repeating-conic-gradient(#000 0% 25%,rgba(0,0,0,.4) 0% 50%);background-size:14px 14px;"></div>
+        <div style="background:#1a1a1a;">
+          <svg viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;">
+            <text x="200" y="68" text-anchor="middle"
+                  font-family="'Bebas Neue', Impact, sans-serif"
+                  font-size="72" fill="#FF4D13"
+                  textLength="384" lengthAdjust="spacing">OVERDRIVE</text>
+          </svg>
+        </div>
+        <div style="height:14px;background-image:repeating-conic-gradient(#000 0% 25%,rgba(0,0,0,.4) 0% 50%);background-size:14px 14px;"></div>
+      </div>
       <div class="win-banner-sub">Challenge Complete</div>
     </div>
     <div class="chk chk-lime"></div>
@@ -418,7 +488,7 @@
   </div>
 
   <div class="actions">
-    <button class="btn btn-check" onclick="checkAnswers()">✓ CHECK</button>
+    <button class="btn btn-check" onclick="checkAnswers()">SUBMIT</button>
     <button class="btn btn-hint"  onclick="revealLetter()">
       <span class="hint-cost">−1</span>💡 HINT
     </button>
@@ -740,28 +810,33 @@ function moveToNextEmpty(r, c) {
 // CHECK ANSWERS
 // ═══════════════════════════════════════════════════════
 function checkAnswers() {
-  let allFilled = true;
-
-  // Mark wrong cells red (correct cells already green from real-time check)
+  // Count unsolved and empty cells
+  let emptyCount   = 0;
+  let unsolvedCount= 0;
   for (const k in cellEls) {
-    const [r,c] = k.split(',').map(Number);
     const { wrap, inp } = cellEls[k];
-    if (!inp.value) { allFilled = false; continue; }
-    if (!wrap.classList.contains('ok')) wrap.classList.add('bad');
+    if (!inp.value) { emptyCount++; continue; }
+    if (!lockedCells.has(k)) unsolvedCount++;
   }
 
-  if (!allFilled) { setStatus('⚠ FILL ALL CELLS FIRST', '#f5a623'); return; }
-
-  const allOk = Object.values(cellEls).every(({wrap}) => wrap.classList.contains('ok'));
-
-  if (allOk) {
-    const finalScore = calcScore();
-    populateWinScreen(finalScore);
-    sendToSheets(playerEmail, 'completed', finalScore, hintedCells.size);
-    setTimeout(() => document.getElementById('winOverlay').classList.add('show'), 700);
-  } else {
-    setStatus('✕ SOME ANSWERS WRONG — KEEP RACING!', '#ff5555');
+  if (emptyCount > 0) {
+    setStatus(`⚠ ${emptyCount} CELL${emptyCount>1?'S':''} STILL EMPTY`, '#f5a623');
+    return;
   }
+  if (unsolvedCount > 0) {
+    setStatus(`✕ ${unsolvedCount} LETTER${unsolvedCount>1?'S':''} INCORRECT — KEEP RACING!`, '#ff5555');
+    // Highlight wrong cells red so player can see them
+    for (const k in cellEls) {
+      if (!lockedCells.has(k)) cellEls[k].wrap.classList.add('bad');
+    }
+    return;
+  }
+
+  // All correct — show win screen
+  const finalScore = calcScore();
+  populateWinScreen(finalScore);
+  sendToSheets(playerEmail, 'completed', finalScore, hintedCells.size);
+  setTimeout(() => document.getElementById('winOverlay').classList.add('show'), 700);
 }
 
 function refreshCluePtLabels() {
