@@ -566,9 +566,9 @@ function buildClues() {
 // NAVIGATION
 // ═══════════════════════════════════════════════════════
 function wordsAt(r, c) { return (cwMap[`${r},${c}`] || []).map(m => WORDS[m.wi]); }
-function activateWord(w) { activeDir = w.dir; setActive(w.row, w.col, false); }
+function activateWord(w) { activeDir = w.dir; setActive(w.row, w.col, false, true); }
 
-function setActive(r, c, toggle = true) {
+function setActive(r, c, toggle = true, scrollClue = false) {
   const k = `${r},${c}`;
   if (!cellEls[k]) return;
   if (toggle && activeRC && activeRC.r === r && activeRC.c === c) {
@@ -590,13 +590,17 @@ function setActive(r, c, toggle = true) {
     }
     document.querySelectorAll('.clue-row').forEach(e => e.classList.remove('active'));
     const ce = document.getElementById(`cl-${aw.dir}-${aw.num}`);
-    if (ce) { ce.classList.add('active'); ce.scrollIntoView({block:'nearest', behavior:'smooth'}); }
+    if (ce) {
+      ce.classList.add('active');
+      // Only scroll clue into view on explicit click/word-jump — never during typing
+      if (scrollClue) ce.scrollIntoView({block:'nearest', behavior:'smooth'});
+    }
   }
   cellEls[k].wrap.classList.add('hot');
   cellEls[k].inp.focus();
 }
 
-function cellClick(r, c) { setActive(r, c, true); }
+function cellClick(r, c) { setActive(r, c, true, true); }
 
 function cellInput(e, r, c) {
   // locked cell — restore correct letter and bail
