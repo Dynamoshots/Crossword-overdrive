@@ -26,7 +26,7 @@
       --f-mono : 'JetBrains Mono', monospace;
     }
 
-    body { background: var(--dark); color: var(--white); font-family: var(--f-body); min-height: 100vh; overflow-x: hidden; }
+    body { background: var(--dark); color: var(--white); font-family: var(--f-body); min-height: 100vh; overflow-x: clip; }
 
     /* Speed-line bg */
     .speed-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; opacity: .04; }
@@ -176,8 +176,9 @@
 
     /* ─── PUZZLE ─────────────────────────────────────── */
     .puzzle-layout { display: flex; gap: 18px; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
-
-    .grid-wrap { background: var(--darker); border: 2px solid #2a2a2a; padding: 12px; flex-shrink: 0; overflow-x: auto; }
+    /* Dedicated scroll container so the grid always starts at the left edge on mobile */
+    .grid-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .grid-wrap { background: var(--darker); border: 2px solid #2a2a2a; padding: 12px; flex-shrink: 0; display: inline-block; }
     .xw-grid   { display: inline-grid; gap: 2px; background: #0d0d0d; }
 
     /* cells */
@@ -250,6 +251,11 @@
       .stats-strip { flex-wrap: wrap; }
       .stat-block { min-width: 80px; }
       .hint-toast { white-space: normal; text-align: center; width: 90%; }
+      /* Break grid-scroll out of app padding so it's full-width edge-to-edge */
+      .grid-scroll  { margin: 0 -20px; padding: 0 20px; box-sizing: content-box; }
+      /* Stack grid above clues on mobile */
+      .puzzle-layout { flex-direction: column; align-items: stretch; justify-content: flex-start; }
+      .grid-wrap { align-self: flex-start; }
     }
     @media (max-width: 420px) { :root { --cell-sz: 26px; } }
   </style>
@@ -471,21 +477,24 @@
 
   <div class="chk" style="margin:0 -20px 20px"></div>
 
-  <div class="puzzle-layout">
-    <div class="grid-wrap">
-      <div class="xw-grid" id="grid"></div>
-    </div>
-    <div class="clues-panel">
-      <div class="clues-sec">
-        <div class="clues-hd">→ ACROSS</div>
-        <div id="acrossClues"></div>
+  <!-- On mobile: grid-scroll is full-width and scrollable; clues stack below -->
+  <div class="grid-scroll">
+    <div class="puzzle-layout">
+      <div class="grid-wrap">
+        <div class="xw-grid" id="grid"></div>
       </div>
-      <div class="clues-sec">
-        <div class="clues-hd">↓ DOWN</div>
-        <div id="downClues"></div>
-      </div>
-    </div>
-  </div>
+      <div class="clues-panel">
+        <div class="clues-sec">
+          <div class="clues-hd">→ ACROSS</div>
+          <div id="acrossClues"></div>
+        </div>
+        <div class="clues-sec">
+          <div class="clues-hd">↓ DOWN</div>
+          <div id="downClues"></div>
+        </div>
+      </div><!-- /.clues-panel -->
+    </div><!-- /.puzzle-layout -->
+  </div><!-- /.grid-scroll -->
 
   <div class="actions">
     <button class="btn btn-check" onclick="checkAnswers()">SUBMIT</button>
